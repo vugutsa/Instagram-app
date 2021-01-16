@@ -6,5 +6,10 @@ class Image(models.Model):
     description = models.CharField(max_length =200)
     date = models.DateTimeField(auto_now_add=True)
     Images_image = models.ImageField(upload_to = 'images/')
-    # profile = models.ForeignKey('profile', on_delete=models.CASCADE)
+    caption = models.CharField(max_length =60)
+    profile= models.ForeignKey('profile', on_delete=models.CASCADE)
 
+
+class Profile(models.Model):
+    photo = models.ImageField(upload_to = 'images/')
+    bio = models.CharField(max_length =200)
