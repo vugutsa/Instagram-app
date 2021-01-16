@@ -19,32 +19,32 @@ def insta_today(request):
             '''
     return render(request, 'all-gramm/today-gramm.html', {"date": date,})
 
-# def convert_dates(dates):
+def convert_dates(dates):
     
-#     # Function that gets the weekday number for the date.
-#     day_number = dt.date.weekday(dates)
+    # Function that gets the weekday number for the date.
+    day_number = dt.date.weekday(dates)
 
-#     days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',"Sunday"]
+    days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',"Sunday"]
 
-#     # Returning the actual day of the week
-#     day = days[day_number]
-#     return day
+    # Returning the actual day of the week
+    day = days[day_number]
+    return day
 
-# def past_days_insta(request,past_date):
-#     try:
-#     # Converts data from the string Url
-#         date = dt.datetime.strptime(past_date,'%Y-%m-%d').date()
-#     except ValueError:
-#         # Raise 404 error when ValueError is thrown
-#         raise Http404()
-#     day = convert_dates(date)
-#     html = f'''
-#         <html>
-#             <body>
-#                 <h1>Insta for {day} {date.day}-{date.month}-{date.year}</h1>
-#             </body>
-#         </html>
-#             '''
-#     if date == dt.date.today():
-#         return redirect(news_of_day)    
-#     return render(request, 'all-gramm/past-gramm.html', {"date": date})
+def past_days_insta(request,past_date):
+    try:
+    # Converts data from the string Url
+        date = dt.datetime.strptime(past_date,'%Y-%m-%d').date()
+    except ValueError:
+        # Raise 404 error when ValueError is thrown
+        raise Http404()
+    day = convert_dates(date)
+    html = f'''
+        <html>
+            <body>
+                <h1>Insta for {day} {date.day}-{date.month}-{date.year}</h1>
+            </body>
+        </html>
+            '''
+    if date == dt.date.today():
+        return redirect(news_of_day)    
+    return render(request, 'all-gramm/past-gramm.html', {"date": date})
