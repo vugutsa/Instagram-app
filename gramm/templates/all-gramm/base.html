@@ -1,26 +1,22 @@
 {% load bootstrap3 %}
-{% load static%}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
 
   {% if title %}
-  <title>Instagram app - {{title}}</title>
+  <title>Instagram - {{title}}</title>
   {% else %}
-    <title> Instagram app </title>
+    <title> Instagram </title>
   {% endif %}
 
   {% block styles %}
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   {% endblock %}
 
 </head>
 <body>
-    {% include "navbar.html" %}
-
-    {% block content %}  {%endblock%}
+    {% block content %} <h1 class='text-center'>Insta for {{date|date:"l d-F Y"}}</h1> {%endblock%}
 
     {% block scripts %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
