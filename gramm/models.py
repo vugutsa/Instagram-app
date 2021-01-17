@@ -1,13 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Image(models.Model):
     image_name = models.CharField(max_length =60)
     # description = models.CharField(max_length =200)
-    date = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateTimeField(auto_now_add=True)
     Images_image = models.ImageField(upload_to = 'images/')
     caption = models.CharField(max_length =60)
     profile= models.ForeignKey('profile', on_delete=models.CASCADE)
+    comment = models.TextField(blank=True)
+    name = models.CharField(max_length =60)
 
     def save_image(self):
         self.save()
@@ -31,7 +34,7 @@ class Profile(models.Model):
     @classmethod
     def search_by_name(cls,search_term):
         news = cls.objects.filter(title__icontains=search_term)
-        return image
+        return photo
     
 class tags(models.Model):
     name = models.CharField(max_length =30)
@@ -42,3 +45,8 @@ class tags(models.Model):
 class GrammLetterRecipients(models.Model):
     name = models.CharField(max_length = 30)
     email = models.EmailField()    
+    
+class Follow(models.Model):
+    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    follow_user = models.ForeignKey(User,related_name='follow_user', on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)    

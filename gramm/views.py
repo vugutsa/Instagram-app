@@ -74,3 +74,11 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'all-news/search.html',{"message":message})
+    
+@login_required(login_url='/accounts/login/')   
+def image(request,article_id):
+    try:
+        article = Article.objects.get(id = image_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"all-gramm/image.html", {"image":image})     
