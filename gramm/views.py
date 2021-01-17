@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 import datetime as dt
 from .forms import GrammLetterForm
+from .email import send_welcome_email
 
 # Create your views here.
 def insta_today(request):
@@ -23,6 +24,8 @@ def insta_today(request):
             email = form.cleaned_data['email']
             recipient = GrammLetterRecipients(name = name,email =email)
             recipient.save()
+            send_welcome_email(name,email)
+            
             HttpResponseRedirect('insta_today')
     else:
         form = GrammLetterForm()
