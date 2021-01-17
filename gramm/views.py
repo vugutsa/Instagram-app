@@ -2,9 +2,6 @@ from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404
 import datetime as dt
 # Create your views here.
-def welcome(request):
-    return HttpResponse('Welcome to Instagram')
-
 def insta_today(request):
     date = dt.date.today()
 
@@ -48,3 +45,16 @@ def past_days_insta(request,past_date):
     if date == dt.date.today():
         return redirect(news_of_day)    
     return render(request, 'all-gramm/past-gramm.html', {"date": date})
+
+def search_results(request):
+    
+    if 'profile' in request.GET and request.GET["profile"]:
+        search_term = request.GET.get("profile")
+        searched_articles = Article.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'all-gramm/search.html',{"message":message,"profile": searched_articles})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'all-news/search.html',{"message":message})

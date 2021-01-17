@@ -8,10 +8,16 @@ class Image(models.Model):
     Images_image = models.ImageField(upload_to = 'images/')
     caption = models.CharField(max_length =60)
     profile= models.ForeignKey('profile', on_delete=models.CASCADE)
-    post = models.TextField()
+
+
 class Profile(models.Model):
     photo = models.ImageField(upload_to = 'images/')
     bio = models.CharField(max_length =200)
+
+    @classmethod
+    def search_by_name(cls,search_term):
+        news = cls.objects.filter(title__icontains=search_term)
+        return image
     
 class tags(models.Model):
     name = models.CharField(max_length =30)
