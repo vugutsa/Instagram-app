@@ -10,7 +10,7 @@ class Image(models.Model):
     caption = models.CharField(max_length =60)
     profile= models.ForeignKey('profile', on_delete=models.CASCADE)
     comment = models.TextField(blank=True)
-    name = models.CharField(max_length =60)
+    
 
     def save_image(self):
         self.save()
@@ -18,6 +18,11 @@ class Image(models.Model):
     def delete_image(self):
         self.delete
         
+    @classmethod
+    def search_by_name(cls,search_term):
+        image = cls.objects.filter(name__icontains=search_term)
+        return image
+         
     @classmethod
     def update_caption(cls, id, value):
         cls.objects.filter(id=id).update(name = value)
@@ -30,11 +35,14 @@ class Image(models.Model):
 class Profile(models.Model):
     photo = models.ImageField(upload_to = 'images/')
     bio = models.CharField(max_length =200)
+    name = models.CharField(max_length =60)
 
     @classmethod
     def search_by_name(cls,search_term):
         news = cls.objects.filter(title__icontains=search_term)
         return photo
+    def __str__(self):
+        return self.name  
     
 class tags(models.Model):
     name = models.CharField(max_length =30)
