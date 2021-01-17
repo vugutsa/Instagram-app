@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 
 # Create your models here.
 class Image(models.Model):
@@ -10,6 +11,7 @@ class Image(models.Model):
     caption = models.CharField(max_length =60)
     profile= models.ForeignKey('profile', on_delete=models.CASCADE)
     comment = models.TextField(blank=True)
+    post = HTMLField()
     
 
     def save_image(self):
