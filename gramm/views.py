@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404
 import datetime as dt
+from .forms import GrammLetterForm
 # Create your views here.
 def insta_today(request):
     date = dt.date.today()
@@ -14,7 +15,14 @@ def insta_today(request):
             </body>
         </html>
             '''
-    return render(request, 'all-gramm/today-gramm.html', {"date": date,})
+    if request.method == 'POST':
+        form = NewsLetterForm(request.POST)
+        if form.is_valid():
+            print('valid')
+    else:
+        form = GrammLetterForm()
+       
+    return render(request, 'all-gramm/today-gramm.html', {"date": date,"gramm":gramm,"letterForm":form})
 
 def convert_dates(dates):
     
