@@ -1,9 +1,12 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'instaToday' %}">Instagram</a>
+      <a class="navbar-brand" href="">Instagram</a>
     </div>
-
+    <div class="insta">
+      <img src="/media/images/instagram-scheduling-automatic-pubishing-opinion.jpg" alt="instagram" width="5%" height="5%">
+    </div>
+<br>
     <!-- Adding a search form  -->
     <div class="col-sm-4 col-md-4 navbar-right">
 
@@ -29,7 +32,13 @@
                 </a>
           <ul class="dropdown-menu" role="menu">
             <li>
-              <a href="{%url 'instaToday'%}">Home</a>
+              <a href="{%url 'index'%}">Home</a>
+            </li>
+            <li>
+              <a href="{%url 'new-profile'%}">New profile</a>
+            </li>
+            <li>
+              <a href="{%url 'new-post'%}">post</a>
             </li>
             <li>
               <a href="/accounts/password/change">Change Password</a>

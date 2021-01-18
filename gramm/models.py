@@ -9,7 +9,7 @@ class Image(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     Images_image = models.ImageField(upload_to = 'images/')
     caption = models.CharField(max_length =60)
-    profile= models.ForeignKey('profile', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField(blank=True)
     post = HTMLField()
     
@@ -18,7 +18,7 @@ class Image(models.Model):
         self.save()
     
     def delete_image(self):
-        self.delete
+        self.delete()
         
     @classmethod
     def search_by_name(cls,search_term):
@@ -37,14 +37,20 @@ class Image(models.Model):
 class Profile(models.Model):
     photo = models.ImageField(upload_to = 'images/')
     bio = models.CharField(max_length =200)
-    name = models.CharField(max_length =60)
+    name = models.OneToOneField(User,on_delete=models.CASCADE)
 
+
+    def save_profile(self):
+        self.save()
+    
+    def delete_profile(self):
+        self.delete()
     @classmethod
     def search_by_name(cls,search_term):
         news = cls.objects.filter(title__icontains=search_term)
         return photo
     def __str__(self):
-        return self.name  
+        return self.bio 
     
 class tags(models.Model):
     name = models.CharField(max_length =30)
@@ -52,11 +58,11 @@ class tags(models.Model):
     def __str__(self):
         return self.name    
     
-class GrammLetterRecipients(models.Model):
-    name = models.CharField(max_length = 30)
-    email = models.EmailField()    
+# class GrammLetterRecipients(models.Model):
+#     name = models.CharField(max_length = 30)
+#     email = models.EmailField()    
     
-class Follow(models.Model):
-    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
-    follow_user = models.ForeignKey(User,related_name='follow_user', on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)    
+# class Follow(models.Model):
+#     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+#     follow_user = models.ForeignKey(User,related_name='follow_user', on_delete=models.CASCADE)
+#     date = models.DateTimeField(auto_now_add=True)    
