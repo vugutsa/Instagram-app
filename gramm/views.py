@@ -1,10 +1,9 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 import datetime as dt
-
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
-from .models import  Image,Profile
+from .models import  Image,Profile,Comment
 from .forms import NewPostForm ,GrammLetterForm,ProfileForm,NewsLetterForm
 
 @login_required(login_url='/accounts/login/')
@@ -66,16 +65,16 @@ def insta_today(request):
         form = GrammLetterForm()
     return render(request, 'all-gramm/today-gramm.html', {"date": date,"letterForm":form})
 
-def convert_dates(dates):
+# def convert_dates(dates):
     
-    # Function that gets the weekday number for the date.
-    day_number = dt.date.weekday(dates)
+#     # Function that gets the weekday number for the date.
+#     day_number = dt.date.weekday(dates)
 
-    days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',"Sunday"]
+#     days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',"Sunday"]
 
-    # Returning the actual day of the week
-    day = days[day_number]
-    return day
+#     # Returning the actual day of the week
+#     day = days[day_number]
+#     return day
 
 def past_days_insta(request,past_date):
     try:
@@ -100,27 +99,14 @@ def search_results(request):
     
     if 'profile' in request.GET and request.GET["profile"]:
         search_term = request.GET.get("profile")
-        searched_images = Image.search_by_name(search_term)
+        searched_images = Image.search_by_image_name(search_term)
         message = f"{search_term}"
 
-        return render(request, 'all-gramm/search.html',{"message":message,"profile": searched_articles})
+        return render(request, 'all-gramm/search.html',{"message":message,"profile": searched_profiles})
 
     else:
         message = "You haven't searched for any term"
         return render(request, 'all-news/search.html',{"message":message})
-    
-# def search_results(request):
-    
-#     if 'image' in request.GET and request.GET["image"]:
-#         search_term = request.GET.get("image")
-#         searched_images = Image.search_by_name(search_term)
-#         message = f"{search_term}"
-
-#         return render(request, 'all-images/search.html',{"message":message,"images": searched_images})
-
-    # else:
-    #     message = "You haven't searched for any term"
-    #     return render(request, 'all-news/search.html',{"message":message})
 
 @login_required(login_url='/accounts/login/')  
 def new_profile(request):
@@ -128,9 +114,9 @@ def new_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            article = form.save(commit=False)
-            article.editor = current_user
-            article.save()
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
         return redirect('instaToday')
 
     else:
@@ -146,7 +132,7 @@ def new_comment(request):
             post = form.save(commit=False)
             post.Author = current_user
             post.save()
-        return redirect('newsToday')
+        return redirect('instaToday')
     else:
         form = CommentForm()
     return render(request, 'new_comment.html', {"form": form})

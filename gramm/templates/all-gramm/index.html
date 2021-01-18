@@ -18,12 +18,7 @@
               </div>
             </div>
             <img
-              src="{{image.Images_image.url}}"
-              class="card-img-top"
-              alt="{{image.Images_image}}"
-              height="600px"
-              width="550px"/>
-
+              src="{{image.Images_image.url}}" class="card-img-top" alt="{{image.Images_image}}"height="500px" width="400px"/>
             <div class="">
               <!-- <li class="list-group-item">
                 <a href="{%url 'comment'%}"
@@ -34,15 +29,12 @@
             <div class="card-body">
               <h5 class="card-title"></h5>
               <p class="card-text">{{image.caption}}</p>
-              <p class="card-text">{{image.comment}}</p>
               <p class="card-text">{{profile.bio}}</p>
-              <p class="card-text">
-                <small class="text-muted">{{ image.pub_date }}</small>
-              </p>
+              <p class="card-text">{{image.pub_date}}</p>
             </div>
           </div>
         </div>
-        <br /><br />
+        <br>
         {% empty %}
         <div class="row">
           <h2 class="text-center">There No insta Items</h2>
@@ -53,10 +45,7 @@
         <h3>Profile</h3>
         {% for user in users %}
         <img
-          src="{{user.photo.url}}"
-          class="card-img-top"
-          alt="{{user.user}}"
-        width="40%" height="40%"/>
+          src="{{user.photo.url}}"class="card-img-top"alt="{{user.user}}"width="40%" height="40%"/>
         <p>{{user.user}} <button class="btn btn-success">Follow</button></p>
         <hr />
         {% empty %}
