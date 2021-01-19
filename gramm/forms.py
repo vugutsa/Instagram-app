@@ -1,5 +1,5 @@
 from django import forms
-from .models import Image,Profile
+from .models import Image,Profile,Comment
 
 
 
@@ -7,7 +7,7 @@ from .models import Image,Profile
 class NewPostForm(forms.ModelForm):
     class Meta:
         model = Image
-        exclude = ['pub_date', 'Author', 'author_profile','likes']
+        exclude = ['pub_date', 'Author', 'author_profile']
         
 
 class GrammLetterForm(forms.Form):
@@ -15,7 +15,7 @@ class GrammLetterForm(forms.Form):
     email = forms.EmailField(label='Email')
     class Meta:
         model = Image
-        exclude = ['pub_date', 'Author', 'author_profile','likes']
+        exclude = ['pub_date', 'Author', 'author_profile']
         
         
 class ProfileForm(forms.ModelForm):
@@ -26,4 +26,9 @@ class ProfileForm(forms.ModelForm):
         
 class NewsLetterForm(forms.Form):
     your_name = forms.CharField(label='First Name',max_length=30)
-    email = forms.EmailField(label='Email')               
+    email = forms.EmailField(label='Email')   
+    
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['user']

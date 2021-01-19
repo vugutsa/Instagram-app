@@ -4,7 +4,7 @@ import datetime as dt
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from .models import  Image,Profile,Comment
-from .forms import NewPostForm ,GrammLetterForm,ProfileForm,NewsLetterForm
+from .forms import NewPostForm ,GrammLetterForm,ProfileForm,NewsLetterForm,CommentForm
 
 @login_required(login_url='/accounts/login/')
 def index(request):
@@ -65,16 +65,16 @@ def insta_today(request):
         form = GrammLetterForm()
     return render(request, 'all-gramm/today-gramm.html', {"date": date,"letterForm":form})
 
-# def convert_dates(dates):
+def convert_dates(dates):
     
-#     # Function that gets the weekday number for the date.
-#     day_number = dt.date.weekday(dates)
+    # Function that gets the weekday number for the date.
+    day_number = dt.date.weekday(dates)
 
-#     days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',"Sunday"]
+    days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',"Sunday"]
 
-#     # Returning the actual day of the week
-#     day = days[day_number]
-#     return day
+    # Returning the actual day of the week
+    day = days[day_number]
+    return day
 
 def past_days_insta(request,past_date):
     try:
@@ -94,19 +94,19 @@ def past_days_insta(request,past_date):
     if date == dt.date.today():
         return redirect(news_of_day)    
     return render(request, 'all-gramm/past-gramm.html', {"date": date})
-
 def search_results(request):
     
-    if 'profile' in request.GET and request.GET["profile"]:
-        search_term = request.GET.get("profile")
-        searched_images = Image.search_by_image_name(search_term)
+    if 'image' in request.GET and request.GET["image"]:
+        search_term = request.GET.get("image")
+        searched_images = Image.search_by_name(search_term)
         message = f"{search_term}"
 
-        return render(request, 'all-gramm/search.html',{"message":message,"profile": searched_profiles})
+        return render(request, 'all-images/search.html',{"message":message,"images": searched_images})
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'all-news/search.html',{"message":message})
+        return render(request, 'all-gramm/search.html',{"message":message})
+
 
 @login_required(login_url='/accounts/login/')  
 def new_profile(request):

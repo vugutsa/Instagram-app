@@ -4,7 +4,7 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 class Image(models.Model):
-    image_name = models.CharField(max_length =60)
+    name = models.CharField(max_length =60)
     # description = models.CharField(max_length =200)
     pub_date = models.DateTimeField(auto_now_add=True)
     Images_image = models.ImageField(upload_to = 'images/')
@@ -19,11 +19,12 @@ class Image(models.Model):
     
     def delete_image(self):
         self.delete()
-        
+           
     @classmethod
-    def search_by_image_name(cls,search_term):
-        image_name = cls.objects.filter(name__icontains=search_term)
-        return image_name
+    def search_by_name(cls,search_term):
+        image = cls.objects.filter(name__icontains=search_term)
+        return image
+     
          
     @classmethod
     def update_caption(cls, id, value):
