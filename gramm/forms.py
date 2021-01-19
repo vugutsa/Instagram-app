@@ -30,5 +30,5 @@ class NewsLetterForm(forms.Form):
     
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        exclude = ['user']
+        model = Comment
+        exclude = ['author']

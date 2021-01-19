@@ -31,7 +31,7 @@ class Image(models.Model):
         cls.objects.filter(id=id).update(name = value)
         
     def __str__(self):
-        return self.image_name
+        return self.name
        
 
 

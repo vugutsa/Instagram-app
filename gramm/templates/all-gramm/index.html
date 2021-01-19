@@ -17,37 +17,36 @@
                 </div>
               </div>
             </div>
-            <img
-              src="{{image.Images_image.url}}" class="card-img-top" alt="{{image.Images_image}}"height="500px" width="400px"/>
+            <img src="{{image.Images_image.url}}" class="card-img-top" alt="{{image.Images_image}}"height="500px" width="400px"/>
             <div class="">
-              <!-- <li class="list-group-item">
-                <a href="{%url 'comment'%}"
-                  ><i class="far fa-comment"></i>{{comments}}</a
+              <li class="list-group-item">
+                <a href="{%url 'new_comment'%}"
+                  >Comment {{comments}}</a
                 >
-              </li> -->
+              </li>
             </div>
             <div class="card-body">
               <h5 class="card-title"></h5>
-              <p class="card-text">{{image.author}}</p>
+              <p class="card-text">Authored by;{{image.author}}</p>
               <p class="card-text">{{image.caption}}</p>
               <p class="card-text">{{profile.bio}}</p>
               <p class="card-text">{{image.pub_date}}</p>
               <p class="card-text">{{comment.comment}}</p>
+              <p class="card-text">{{image.name}}</p>
             </div>
           </div>
         </div>
         <br>
         {% empty %}
         <div class="row">
-          <h2 class="text-center">There No insta Items</h2>
+          <h2 class="text-center">There No instas</h2>
         </div>
         {% endfor %}
       </div>
       <div class="col-md-3 avat">
         <h3>Profile</h3>
         {% for user in users %}
-        <img
-          src="{{user.photo.url}}"class="card-img-top"alt="{{user.user}}"width="40%" height="40%"/>
+        <img src="{{user.photo.url}}"class="card-img-top"alt="{{user.user}}"width="40%" height="40%"/>
         <p>{{user.user}} <button class="btn btn-success">Follow</button></p>
         <hr />
         {% empty %}

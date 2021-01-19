@@ -130,7 +130,7 @@ def new_comment(request):
         form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.Author = current_user
+            post.author = current_user
             post.save()
         return redirect('instaToday')
     else:
