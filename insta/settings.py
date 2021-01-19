@@ -17,11 +17,11 @@ from decouple import config,Csv
 
 
 # Email configurations remember to install python-decouple
-# EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = config('vugutsamercy84@gmail.com')
+EMAIL_HOST_PASSWORD = config('2423Mercy')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -95,9 +95,9 @@ if config('MODE')=="dev":
        DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': 'instagrammy',
-           'USER': 'moringa',
-           'PASSWORD': 'Access',
+           'NAME': config('instagrammy'),
+           'USER': config('moringa'),
+           'PASSWORD': config('Access'),
            'PORT': '',
        }
        
