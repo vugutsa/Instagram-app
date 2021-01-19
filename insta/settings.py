@@ -20,8 +20,8 @@ from decouple import config,Csv
 EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_HOST_USER = config('vugutsamercy84@gmail.com')
-EMAIL_HOST_PASSWORD = config('2423Mercy')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORDf')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,7 +38,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = []
 
-
+DEBUG = config('DEBUG', default=True, cast=bool)
 # Application definition
 
 INSTALLED_APPS = [
@@ -95,9 +95,10 @@ if config('MODE')=="dev":
        DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('instagrammy'),
-           'USER': config('moringa'),
-           'PASSWORD': config('Access'),
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
            'PORT': '',
        }
        
@@ -109,7 +110,6 @@ else:
            default=config('DATABASE_URL')
        )
    }
-
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
