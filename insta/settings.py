@@ -17,7 +17,7 @@ from decouple import config,Csv
 
 
 # Email configurations remember to install python-decouple
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
@@ -34,7 +34,7 @@ MODE=config("MODE", default="dev")
 SECRET_KEY = '%=05t^xe6#co(!%inc%&@65yij_++cr0%uk*ka9dj96-@jj#2_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = []
 
@@ -114,6 +114,7 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS',default="herokuapp.com", cast=Csv())
+# ALLOWED_HOSTS = ['*']
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
