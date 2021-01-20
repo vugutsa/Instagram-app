@@ -1,7 +1,7 @@
 # INSTAGRAM-APP
 
 ## Description
-*
+* This project allows a user to sign in to the application to start using it by posting pictures,updating their profile and commenting on them.
 
 ## Author
 * MERCY VUGUTSA 
